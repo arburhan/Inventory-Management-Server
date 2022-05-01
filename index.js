@@ -11,7 +11,8 @@ app.use(express.json());
 
 // cluster code 
 
-const uri = "mongodb+srv://inventoryAdmin:<password>@cluster0.1si1c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.1si1c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+console.log(uri)
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect(err => {
     const collection = client.db("test").collection("devices");
