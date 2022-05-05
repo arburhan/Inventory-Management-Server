@@ -39,7 +39,8 @@ async function run() {
     }
 }
 run().catch(console.dir);
-
+// errormoy life 
+// i hate error but erros love me more
 
 app.get('/', (req, res) => {
     res.send('server running successfully');
