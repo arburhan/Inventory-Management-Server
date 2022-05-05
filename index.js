@@ -20,9 +20,9 @@ async function run() {
         await client.connect();
         const itemsCollection = client.db('All-Items').collection('items');
 
-        app.get('/limitItems', async (req, res) => {
+        app.get('/items', async (req, res) => {
             const query = {};
-            const cursor = itemsCollection.find(query).limit(6);
+            const cursor = itemsCollection.find(query);
             const items = await cursor.toArray();
             res.send(items);
         })
