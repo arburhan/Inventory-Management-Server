@@ -20,13 +20,13 @@ async function run() {
         await client.connect();
         const itemsCollection = client.db('All-Items').collection('items');
 
-        app.get('/items', async (req, res) => {
+        app.get('/inventory', async (req, res) => {
             const query = {};
             const cursor = itemsCollection.find(query);
             const items = await cursor.toArray();
             res.send(items);
         });
-        app.get('/items/:id', async (req, res) => {
+        app.get('/inventory/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const item = await itemsCollection.findOne(query);
