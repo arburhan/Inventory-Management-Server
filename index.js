@@ -39,7 +39,13 @@ async function run() {
             const query = { _id: ObjectId(id) };
             const item = await itemsCollection.deleteOne(query);
             res.send(item);
-        })
+        });
+        // post item
+        app.post('/inventory', async (req, res) => {
+            const newItem = req.body;
+            const result = await itemsCollection.insertOne(newItem);
+            res.send(result);
+        });
 
     }
     finally {
