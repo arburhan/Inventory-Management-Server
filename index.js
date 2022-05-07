@@ -19,6 +19,7 @@ async function run() {
     try {
         await client.connect();
         const itemsCollection = client.db('All-Items').collection('items');
+        const categoryCollection = client.db('All-Items').collection('products');
 
         app.get('/inventory', async (req, res) => {
             const query = {};
@@ -33,6 +34,14 @@ async function run() {
             res.send(item);
         });
 
+        // category section data
+        app.get('/allcategory', async (req, res) => {
+            const query = {};
+            const cursor = categoryCollection.find(query);
+            const category = await cursor.toArray();
+            res.send(category);
+        })
+
         // get item use query
         app.get('/myitems', async (req, res) => {
             const email = req.query.email;
@@ -40,7 +49,7 @@ async function run() {
             const cursor = itemsCollection.find(query);
             const items = await cursor.toArray();
             res.send(items);
-        })
+        });
 
         // delete item
         app.delete('/inventory/:id', async (req, res) => {
@@ -68,7 +77,7 @@ async function run() {
             };
             const result = await itemsCollection.updateOne(query, updateDoc, options);
             res.send(result);
-        })
+        });
 
     }
     finally {
