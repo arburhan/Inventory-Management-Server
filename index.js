@@ -35,7 +35,7 @@ async function run() {
         });
 
         // get item use query
-        app.get('/inventory', async (req, res) => {
+        app.get('/myitems', async (req, res) => {
             const email = req.query.email;
             const query = { email: email };
             const cursor = itemsCollection.find(query);
